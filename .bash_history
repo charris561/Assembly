@@ -90,3 +90,12 @@ dlc
 ls
 vi bits.c
 cat bits.c
+ls
+cd labs/datalab-handout/
+ls
+make
+./driver.pl
+./dlc -e
+./dlc
+./driver.pl
+vi bits.c
