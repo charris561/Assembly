@@ -179,7 +179,8 @@ NOTES:
  *   Rating: 1
  */
 int bitXor(int x, int y) {
-  return (x^y);
+  /* implement bit Xor operation with bitwise & and ~ (bitwise AND and NOT) */
+  return (x & ~y) | (~x & y);
 }
 /* 
  * tmin - return minimum two's complement integer 
