@@ -180,7 +180,7 @@ NOTES:
  */
 int bitXor(int x, int y) {
   /* implement bit Xor operation with bitwise & and ~ (bitwise AND and NOT) */
-  return (x & ~y) | (~x & y);
+  return (x ~& y);
 }
 /* 
  * tmin - return minimum two's complement integer 
