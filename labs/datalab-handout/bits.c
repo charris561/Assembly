@@ -202,7 +202,6 @@ int tmin(void) {
  */
 int isTmax(int x) {
   /* Utilize the next answer being overflow to determine if tmax*/
-  print(x + 1);
   return (x ^ (x + 1));
 }
 /* 
