@@ -189,7 +189,8 @@ int bitXor(int x, int y) {
  *   Rating: 1
  */
 int tmin(void) {
-  return ~(2 << 16);
+  /* Utilize the capabilities of shifts to compute minimum two's complement integer*/
+  return 8 << 28;
 }
 //2
 /*
