@@ -201,7 +201,8 @@ int tmin(void) {
  *   Rating: 1
  */
 int isTmax(int x) {
-  return 2;
+  /* Utilize the next answer being overflow to determine if tmax*/
+  return (x ^ (x + 1));
 }
 /* 
  * allOddBits - return 1 if all odd-numbered bits in word set to 1
