@@ -247,3 +247,7 @@ make
 ./btest -f bitXor -1 4 -2 5
 vi bits.c
 git push
+ls
+git add -A
+git commit -m "Moving workstations"
+git push
