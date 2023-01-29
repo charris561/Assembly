@@ -202,7 +202,8 @@ int tmin(void) {
  */
 int isTmax(int x) {
   /* Utilize the next answer being overflow to determine if tmax*/
-  return !(x ^ (x + 1));
+  print(x + 1);
+  return (x ^ (x + 1));
 }
 /* 
  * allOddBits - return 1 if all odd-numbered bits in word set to 1
