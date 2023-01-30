@@ -202,7 +202,7 @@ int tmin(void) {
  */
 int isTmax(int x) {
   /* Utilize the next answer being overflow to determine if tmax*/
-  return (!x^(x ^ (x + 1)));
+  return (x ^ (x + 1));
 }
 /* 
  * allOddBits - return 1 if all odd-numbered bits in word set to 1
@@ -223,7 +223,8 @@ int allOddBits(int x) {
  *   Rating: 2
  */
 int negate(int x) {
-  return 2;
+  /*Utilize the property of binary and the leading sign bit to negate x*/
+  return x >> 1;
 }
 //3
 /* 
