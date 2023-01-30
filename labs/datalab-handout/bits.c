@@ -202,6 +202,7 @@ int tmin(void) {
  */
 int isTmax(int x) {
   /* Utilize the next answer being overflow to determine if tmax*/
+  printf(!x);
   return (x ^ !(x + 1));
 }
 /* 
