@@ -224,7 +224,7 @@ int allOddBits(int x) {
  */
 int negate(int x) {
   /*Utilize the property of binary and the leading sign bit to negate x*/
-  return ~x >> 1;
+  return ~(x >> 1);
 }
 //3
 /* 
