@@ -284,7 +284,6 @@ int logicalNeg(int x) {
  *  Rating: 4
  */
 int howManyBits(int x) {
-  printf(x + 1);
   return 0;
 }
 //float
