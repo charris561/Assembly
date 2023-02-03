@@ -213,8 +213,7 @@ int isTmax(int x) {
  *   Rating: 2
  */
 int allOddBits(int x) {
-  int mask = 0xAAAAAAAA;
-  return !((x & mask) ^ mask);
+  return 2;
 }
 /* 
  * negate - return -x 
@@ -238,7 +237,9 @@ int negate(int x) {
  *   Rating: 3
  */
 int isAsciiDigit(int x) {
-  return 2;
+  int lower_bound = !(x >> 4 ^ 0x3);
+  int upper_bound = !(x & 0xF ^ 0x9) | !(x & 0xF ^ 0xA) | !(x & 0xF ^ 0xB) | !(x & 0xF ^ 0xC) | !(x & 0xF ^ 0xD);
+  return lower_bound & upper_bound;
 }
 /* 
  * conditional - same as x ? y : z 
