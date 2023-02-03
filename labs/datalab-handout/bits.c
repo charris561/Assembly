@@ -237,9 +237,7 @@ int negate(int x) {
  *   Rating: 3
  */
 int isAsciiDigit(int x) {
-  int lower_bound = !(x >> 4 ^ 0x3);
-  int upper_bound = !(x & 0xF ^ 0x9) | !(x & 0xF ^ 0xA) | !(x & 0xF ^ 0xB) | !(x & 0xF ^ 0xC) | !(x & 0xF ^ 0xD);
-  return lower_bound & upper_bound;
+  return 2;
 }
 /* 
  * conditional - same as x ? y : z 
