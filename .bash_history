@@ -251,3 +251,52 @@ ls
 git add -A
 git commit -m "Moving workstations"
 git push
+ls
+cd labs/datalab-handout/
+ls
+git pull
+make
+./driver.pl
+./btest -e
+./btest
+./dlc bits.c
+./dlc bits.c -e
+./bits.c
+ll
+chmod bits.c 777
+chmod --help
+chmod 777 bits.c
+ls
+./bits.c
+./dlc bits.c
+git pull
+git reset --hard
+git pull
+make
+./dlc bits.c
+./driver.pl
+ls
+cd labs/datalab-handout/
+ls
+vi bits.c
+make
+./driver.pl
+ls
+cd labs/datalab-handout/
+ls
+make
+git pull
+./driver.pl
+./bits.c
+ls
+cd labs/datalab-handout/
+ls
+git pull
+ls
+make
+./driver.pl
+ls
+./ishow
+git pull
+make
+./driver.pl
