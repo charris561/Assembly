@@ -239,7 +239,9 @@ int negate(int x) {
  *   Rating: 3
  */
 int isAsciiDigit(int x) {
-  return (!(~(x >> 8)+1))&(!((x-0x30)>>31))&(!(((x-0x3a)>>31)+1));
+  int left = x + (~(0x30)+1);
+	int right = (~x+1) + 0x39;
+	return !(left >> 31) & !(right >> 31);
 }
 /* 
  * conditional - same as x ? y : z 
@@ -259,7 +261,8 @@ int conditional(int x, int y, int z) {
  *   Rating: 3
  */
 int isLessOrEqual(int x, int y) {
-  return (!(((x-y)>>31)+1)) || (!(x-y));
+  int a = !((x >> 31) ^ (y >> 31));
+	return (a & !((y + (~x + 1)) >> 31)) | (~a & !(y >> 31));
 }
 //4
 /* 
@@ -286,7 +289,18 @@ int logicalNeg(int x) {
  *  Rating: 4
  */
 int howManyBits(int x) {
-  return x ^= x >> 1;
+  int temp = x ^ (x << 1);
+	int bit_16,bit_8,bit_4,bit_2,bit_1;
+	bit_16 = !!(temp >> 16) << 4;
+	temp = temp >> bit_16;
+	bit_8 = !!(temp >> 8) << 3;
+	temp = temp >> bit_8;
+	bit_4 = !!(temp >> 4) << 2;
+	temp = temp >> bit_4;
+	bit_2 = !!(temp >> 2) << 1;
+	temp = temp >> bit_2;
+	bit_1 = !!(temp >> 1);
+	return 1 + bit_1 + bit_2 + bit_4 + bit_8 + bit_16;
 }
 //float
 /* 
