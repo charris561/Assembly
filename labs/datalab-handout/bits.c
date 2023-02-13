@@ -284,13 +284,7 @@ int logicalNeg(int x) {
  *  Rating: 4
  */
 int howManyBits(int x) {
-  int result = x;
-  result = result - ((result >> 1) & 0x55555555);
-  result = (result & 0x33333333) + ((result >> 2) & 0x33333333);
-  result = (result + (result >> 4)) & 0x0F0F0F0F;
-  result = result + (result >> 8);
-  result = result + (result >> 16);
-  return result & 0x0000003F;
+  return x ^= x >> 1;
 }
 //float
 /* 
