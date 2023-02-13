@@ -315,7 +315,24 @@ int howManyBits(int x) {
  *   Rating: 4
  */
 unsigned floatScale2(unsigned uf) {
-  return 2;
+  unsigned a = (uf >> 23) & 0xff;
+	unsigned flag = uf >> 31 << 31;
+	int temp = uf;
+	if (a == 0xff) 
+		return uf;
+	else if (a == 0)
+	{
+		temp = uf << 1;
+		//temp = temp & (~(0xff << 23));
+		temp = temp | flag;
+	}
+	else 
+	{
+		temp = temp + (0x1<<23);
+		temp =  temp | flag;
+	}
+		
+	return temp;
 }
 /* 
  * floatFloat2Int - Return bit-level equivalent of expression (int) f
