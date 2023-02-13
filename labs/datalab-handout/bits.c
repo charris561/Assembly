@@ -213,8 +213,11 @@ int isTmax(int x) {
  *   Rating: 2
  */
 int allOddBits(int x) {
+  /*Create a bit mask using 0x55, set all even numbered bits to 0 and all odd numbered bits to 1*/
   int mask = 0x55 | (0x55 << 8);
+  /*Negate the mask then shift it by 16 bits to extend its coverage to 32-bits*/
   mask = ~(mask + (mask << 16));
+  /*Using x & mask, set all odd bits to 0, then add ~mask + 1 to flip all bits and add 1, then finally negate the result to return all odd bits.*/
   return !((x & mask) + ~mask + 1);
 }
 /* 
@@ -239,9 +242,12 @@ int negate(int x) {
  *   Rating: 3
  */
 int isAsciiDigit(int x) {
-  int left = x + (~(0x30)+1);
-	int right = (~x+1) + 0x39;
-	return !(left >> 31) & !(right >> 31);
+  /*Subtract 0x30 from x by adding its negative value.*/
+  int lower = x + (~(0x30)+1);
+  /*Subtract x from 0x39*/
+	int upper = (~x+1) + 0x39;
+  /*Check to see if lower or upper are negative (not in ASCII digits)*/
+	return !(lower >> 31) & !(upper >> 31);
 }
 /* 
  * conditional - same as x ? y : z 
@@ -251,6 +257,9 @@ int isAsciiDigit(int x) {
  *   Rating: 3
  */
 int conditional(int x, int y, int z) {
+  /*!x << 31 >> 31 converts the result to either 0 or -1. 
+  & (z ^ y) returns z if x is not 0 and 0 otherwise. 
+  Lastly, ^ y returns y if x is not 0 and z if x is 0*/
   return ((!x << 31 >> 31) & (z ^ y)) ^ y;
 }
 /* 
@@ -261,8 +270,9 @@ int conditional(int x, int y, int z) {
  *   Rating: 3
  */
 int isLessOrEqual(int x, int y) {
-  int a = !((x >> 31) ^ (y >> 31));
-	return (a & !((y + (~x + 1)) >> 31)) | (~a & !(y >> 31));
+  /*Utilize XOR of MSB of x and y; then check the sign of y - x to determine if less than or equal to.*/
+  int z = !((x >> 31) ^ (y >> 31));
+	return (z & !((y + (~x + 1)) >> 31)) | (~z & !(y >> 31));
 }
 //4
 /* 
@@ -274,6 +284,7 @@ int isLessOrEqual(int x, int y) {
  *   Rating: 4 
  */
 int logicalNeg(int x) {
+  /*Utilize OR and shift to get either 0 or 1; it will equal 1 if x is equal to 0, else it will return 0.*/
   return ~((x | (~x + 1)) >> 31) & 0x1;
 }
 /* howManyBits - return the minimum number of bits required to represent x in
@@ -289,17 +300,18 @@ int logicalNeg(int x) {
  *  Rating: 4
  */
 int howManyBits(int x) {
-  int temp = x ^ (x << 1);
+  /*Iterate through the bits and utilize shifts to calulate how many bits are needed to represent x.*/
+  int calc = x ^ (x << 1);
 	int bit_16,bit_8,bit_4,bit_2,bit_1;
-	bit_16 = !!(temp >> 16) << 4;
-	temp = temp >> bit_16;
-	bit_8 = !!(temp >> 8) << 3;
-	temp = temp >> bit_8;
-	bit_4 = !!(temp >> 4) << 2;
-	temp = temp >> bit_4;
-	bit_2 = !!(temp >> 2) << 1;
-	temp = temp >> bit_2;
-	bit_1 = !!(temp >> 1);
+	bit_16 = !!(calc >> 16) << 4;
+	calc = calc >> bit_16;
+	bit_8 = !!(calc >> 8) << 3;
+	calc = calc >> bit_8;
+	bit_4 = !!(calc >> 4) << 2;
+	calc = calc >> bit_4;
+	bit_2 = !!(calc >> 2) << 1;
+	calc = calc >> bit_2;
+	bit_1 = !!(calc >> 1);
 	return 1 + bit_1 + bit_2 + bit_4 + bit_8 + bit_16;
 }
 //float
@@ -315,6 +327,7 @@ int howManyBits(int x) {
  *   Rating: 4
  */
 unsigned floatScale2(unsigned uf) {
+  /*Returns the bit-level equivalent of 2 * f for a floating-point argument f by extracting the exponent and sign, and performing different operations based on the value of the exponent.*/
   unsigned a = (uf >> 23) & 0xff;
 	unsigned flag = uf >> 31 << 31;
 	int temp = uf;
@@ -323,12 +336,11 @@ unsigned floatScale2(unsigned uf) {
 	else if (a == 0)
 	{
 		temp = uf << 1;
-		//temp = temp & (~(0xff << 23));
 		temp = temp | flag;
 	}
 	else 
 	{
-		temp = temp + (0x1<<23);
+		temp = temp + (0x1 << 23);
 		temp =  temp | flag;
 	}
 		
